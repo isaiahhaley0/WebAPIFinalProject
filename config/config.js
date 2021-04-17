@@ -7,9 +7,9 @@ const config = {
     'mongodb://' + (process.env.IP || 'localhost') + ':' +
     (process.env.MONGO_PORT || '27017') +
     '/mernproject',
-  stripe_connect_test_client_id: 'YOUR_stripe_connect_test_client',
-  stripe_test_secret_key: 'YOUR_stripe_test_secret_key',
-  stripe_test_api_key: 'YOUR_stripe_test_api_key' 
+  stripe_connect_test_client_id: 'ca_FkyHCg7X8mlvCUdMDao4mMxagUfhIwXb',
+  stripe_test_secret_key: 'sk_test_51IdjFtJmAVwnn4iCIlr0LRq0FxYiC4UYs6hxERVJ7JaMzpYPlwo3lqSOQGPSVKq5y3KWwYbo8CwMSfvPcKy17QxX00ZZvCavOP',
+  stripe_test_api_key: 'pk_test_51IdjFtJmAVwnn4iCVLqTkNl8Lb4gfiVEROmQGAbIhPFUEJAVJoXab0FuD9Zgtr0s5h4FvekH63QLFbE6PAQ9i4BC00k4BWM95A'
 }
 
 export default config

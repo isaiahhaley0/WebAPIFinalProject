@@ -12,7 +12,7 @@ import shopRoutes from './routes/shop.routes'
 import productRoutes from './routes/product.routes'
 import orderRoutes from './routes/order.routes'
 import auctionRoutes from './routes/auction.routes'
-
+import charityRoutes from './routes/charities.router'
 // modules for server side rendering
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
@@ -51,7 +51,7 @@ app.use('/', shopRoutes)
 app.use('/', productRoutes)
 app.use('/', orderRoutes)
 app.use('/', auctionRoutes)
-
+app.use('/', charityRoutes)
 app.get('*', (req, res) => {
   const sheets = new ServerStyleSheets()
   const context = {}

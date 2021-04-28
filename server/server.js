@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 mongoose.Promise = global.Promise
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true })
 mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${config.mongoUri}`)
+  throw new Error(`unable to connect to database: ${CONNECTION_URL}`)
 })
 
 const server = app.listen(PORT, (err) => {

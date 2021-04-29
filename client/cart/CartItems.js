@@ -88,16 +88,20 @@ const useStyles = makeStyles(theme => ({
   },
   removeButton: {
     fontSize: '0.8em'
+  },
+  dropdown: {
+    fontSize: '0.8em'
   }
 }))
 
 export default function CartItems (props) {
   const classes = useStyles()
   const [cartItems, setCartItems] = useState(cart.getCart())
+  let roundupCheck = false;
 
   const handleChange = index => event => {
     let updatedCartItems = cartItems
-    if(event.target.value == 0){
+    if(event.target.value === 0){
       updatedCartItems[index].quantity = 1
     }else{
       updatedCartItems[index].quantity = event.target.value
@@ -107,14 +111,20 @@ export default function CartItems (props) {
   }
 
   const getTotal = () => {
+    //roundup will trigger if the boolean is true, then add to the total at the end
+    let roundup = 0;
+    if(roundupCheck === true)
+      //this just needs to be changed to the actual formula for figuring out the rounded up change
+      //roundup will need to be sent to the database to increase both the roundup total and the total donation amounts.
+      roundup += 2;
     return cartItems.reduce((a, b) => {
-        return a + (b.quantity*b.product.price)
+      return a + (b.quantity*b.product.price) + roundup
     }, 0)
   }
 
   const removeItem = index => event =>{
     let updatedCartItems = cart.removeItem(index)
-    if(updatedCartItems.length == 0){
+    if(updatedCartItems.length === 0){
       props.setCheckout(false)
     }
     setCartItems(updatedCartItems)
@@ -124,17 +134,46 @@ export default function CartItems (props) {
     props.setCheckout(true)
   }
 
-    return (<Card className={classes.card}>
-      <Typography type="title" className={classes.title}>
-        Shopping Cart
-      </Typography>
-      {cartItems.length>0 ? (<span>
+  function CharityDropDown() {
+
+    const [items] = React.useState([
+      {
+        value: 0,
+        charity: "Roundup change to a charity?",
+        name: "Title"
+      },
+      { value: 1, charity: "American Humane", name: "American Humane" },
+      { value: 2, charity: "Best Friends Animal Society", name: "Best Friends Animal Society" },
+      { value: 3, charity: "National Disaster Search Dog Foundation", name: "National Disaster Search Dog Foundation" }
+    ]);
+    //this needs to be fixed, trying to set a global variable to true if any of the charities are selected
+    if(items.value > 0)
+      roundupCheck = true;
+    return (
+        <select>
+          {items.map(item => (
+              <option
+                  key={item.name}
+                  value={item.name}
+              >
+                {item.charity}
+              </option>
+          ))}
+        </select>
+    );
+  }
+
+  return (<Card className={classes.card}>
+    <Typography type="title" className={classes.title}>
+      Shopping Cart
+    </Typography>
+    {cartItems.length>0 ? (<span>
           {cartItems.map((item, i) => {
             return <span key={i}><Card className={classes.cart}>
               <CardMedia
-                className={classes.cover}
-                image={'/api/product/image/'+item.product._id}
-                title={item.product.name}
+                  className={classes.cover}
+                  image={'/api/product/image/'+item.product._id}
+                  title={item.product.name}
               />
               <div className={classes.details}>
                 <CardContent className={classes.content}>
@@ -147,40 +186,43 @@ export default function CartItems (props) {
                 </CardContent>
                 <div className={classes.subheading}>
                   Quantity: <TextField
-                              value={item.quantity}
-                              onChange={handleChange(i)}
-                              type="number"
-                              inputProps={{
-                                  min:1
-                              }}
-                              className={classes.textField}
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              margin="normal"/>
+                    value={item.quantity}
+                    onChange={handleChange(i)}
+                    type="number"
+                    inputProps={{
+                      min:1
+                    }}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    margin="normal"/>
                             <Button className={classes.removeButton} color="primary" onClick={removeItem(i)}>x Remove</Button>
                 </div>
               </div>
             </Card>
             <Divider/>
           </span>})
-        }
-        <div className={classes.checkout}>
+          }
+          <divider>
+      <CharityDropDown/>
+      </divider>
+          <div className={classes.checkout}>
           <span className={classes.total}>Total: ${getTotal()}</span>
-          {!props.checkout && (auth.isAuthenticated()?
-            <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
-            :
-            <Link to="/signin">
-              <Button color="primary" variant="contained">Sign in to checkout</Button>
-            </Link>)}
-          <Link to='/' className={classes.continueBtn}>
+            {!props.checkout && (auth.isAuthenticated()?
+                <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
+                :
+                <Link to="/signin">
+                  <Button color="primary" variant="contained">Sign in to checkout</Button>
+                </Link>)}
+            <Link to='/' className={classes.continueBtn}>
             <Button variant="contained">Continue Shopping</Button>
           </Link>
         </div>
       </span>) :
-      <Typography variant="subtitle1" component="h3" color="primary">No items added to your cart.</Typography>
+        <Typography variant="subtitle1" component="h3" color="primary">No items added to your cart.</Typography>
     }
-    </Card>)
+  </Card>)
 }
 
 CartItems.propTypes = {

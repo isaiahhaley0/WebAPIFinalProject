@@ -211,8 +211,6 @@ export default function CartItems (props) {
 
       </divider>
           <div className={classes.checkout}>
-            <!-- This is where the roundup will be added to the total. We can either do this with the getRoundup function I started
-            or hard coding it into this-->
             <span className={classes.total}>Total: ${getTotal() + getRoundup()}</span>
             {!props.checkout && (auth.isAuthenticated()?
                 <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>

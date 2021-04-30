@@ -90,7 +90,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.8em'
   },
   dropdown: {
-    fontSize: '0.8em'
+    roundup: false
   }
 }))
 
@@ -111,15 +111,18 @@ export default function CartItems (props) {
   }
 
   const getTotal = () => {
-    //roundup will trigger if the boolean is true, then add to the total at the end
-    let roundup = 0;
-    if(roundupCheck === true)
-      //this just needs to be changed to the actual formula for figuring out the rounded up change
-      //roundup will need to be sent to the database to increase both the roundup total and the total donation amounts.
-      roundup += 2;
     return cartItems.reduce((a, b) => {
-      return a + (b.quantity*b.product.price) + roundup
+      return a + (b.quantity*b.product.price)
     }, 0)
+  }
+
+  const getRoundup = () => {
+    //if the global is true, run the roundup formula and it will add to the total at the bottom of this file
+    if(roundupCheck === true) {
+      //roundup formula goes here
+      return 2
+    }
+    else return 0
   }
 
   const removeItem = index => event =>{
@@ -135,31 +138,30 @@ export default function CartItems (props) {
   }
 
   function CharityDropDown() {
-
+    const handleSelect=(e)=>{
+      //working on trying to set the global to true.
+      if(e !== "Title")
+        roundupCheck = true;
+    }
     const [items] = React.useState([
       {
-        value: 0,
         charity: "Roundup change to a charity?",
         name: "Title"
       },
-      { value: 1, charity: "American Humane", name: "American Humane" },
-      { value: 2, charity: "Best Friends Animal Society", name: "Best Friends Animal Society" },
-      { value: 3, charity: "National Disaster Search Dog Foundation", name: "National Disaster Search Dog Foundation" }
+      { charity: "American Humane", name: "American Humane" },
+      { charity: "Best Friends Animal Society", name: "Best Friends Animal Society" },
+      { charity: "National Disaster Search Dog Foundation", name: "National Disaster Search Dog Foundation" }
     ]);
-    //this needs to be fixed, trying to set a global variable to true if any of the charities are selected
-    if(items.value > 0)
-      roundupCheck = true;
     return (
-        <select>
-          {items.map(item => (
-              <option
-                  key={item.name}
-                  value={item.name}
-              >
-                {item.charity}
-              </option>
-          ))}
-        </select>
+        <div>
+          <select>
+            {items.map(({ charity, name }) => (
+                <option key={name} name={name} onSelect={handleSelect(name)}>
+                  {charity}
+                </option>
+            ))}
+          </select>
+        </div>
     );
   }
 
@@ -206,9 +208,12 @@ export default function CartItems (props) {
           }
           <divider>
       <CharityDropDown/>
+
       </divider>
           <div className={classes.checkout}>
-          <span className={classes.total}>Total: ${getTotal()}</span>
+            <!-- This is where the roundup will be added to the total. We can either do this with the getRoundup function I started
+            or hard coding it into this-->
+            <span className={classes.total}>Total: ${getTotal() + getRoundup()}</span>
             {!props.checkout && (auth.isAuthenticated()?
                 <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
                 :

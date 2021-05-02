@@ -91,6 +91,11 @@ const useStyles = makeStyles(theme => ({
   },
   dropdown: {
     roundup: false
+  },
+  select:{
+    height: '24px',
+    width: "100%",
+    backgroundColor: '#80808017'
   }
 }))
 
@@ -156,7 +161,7 @@ export default function CartItems (props) {
     ]);
     return (
         <div>
-          <select>
+          <select className={classes.select}>
             {items.map(({ charity, name }) => (
                 <option key={name} name={name} onSelect={handleSelect(name)}>
                   {charity}

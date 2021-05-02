@@ -150,7 +150,9 @@ export default function CartItems (props) {
       },
       { charity: "American Humane", name: "American Humane" },
       { charity: "Best Friends Animal Society", name: "Best Friends Animal Society" },
-      { charity: "National Disaster Search Dog Foundation", name: "National Disaster Search Dog Foundation" }
+      { charity: "National Disaster Search Dog Foundation", name: "National Disaster Search Dog Foundation" },
+      { charity: "American Civil Liberties Union", name: "American Civil Liberties Union" },
+      { charity: "Free Software Foundation", name: "Free Software Foundation" }
     ]);
     return (
         <div>

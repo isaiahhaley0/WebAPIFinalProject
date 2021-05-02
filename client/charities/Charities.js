@@ -54,14 +54,14 @@ export default function Charities() {
             </Typography>
             <List dense>
                 {charities.map((item, i) => {
-                    return <Link to={"/charities/" + item._id} key={i}>
+                    return <Link to={{pathname: item.websiteUrl}} key={i} target="_blank">
                         <ListItem button>
                             <ListItemAvatar>
                                 <Avatar>
                                     <Person/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={item.name} secondary={<span>$ {item.total_Donation}</span>}/>
+                            <ListItemText primary={item.name} secondary={<span>Total Donations: ${item.total_Donation}</span>}/>
                             <ListItemText />
                             <ListItemSecondaryAction>
                                 <IconButton>

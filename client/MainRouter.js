@@ -25,6 +25,7 @@ import OpenAuctions from './auction/OpenAuctions'
 import NewAuction from './auction/NewAuction'
 import EditAuction from './auction/EditAuction'
 import Auction from './auction/Auction'
+import Charities from "./charities/Charities";
 
 const MainRouter = () => {
   return (<div>
@@ -57,6 +58,8 @@ const MainRouter = () => {
         <PrivateRoute path="/auction/edit/:auctionId" component={EditAuction}/>
         <Route path="/auction/:auctionId" component={Auction}/>
         <Route path="/auctions/all" component={OpenAuctions}/>
+
+        <Route path="/charities/all" component={Charities}/>
       </Switch>
     </div>)
 }

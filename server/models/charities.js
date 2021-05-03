@@ -7,7 +7,7 @@ const CharitySchema = new mongoose.Schema({
     //Used to hold the amount donated in current transaction
     roundup_Donation:{type:Number, required:true},
     //Used to hold all donations
-    total_Donations:{type:Number, required:true},
+    total_Donation:{type:Number, required:true},
     websiteUrl: {type: String, required: false},
 
 });

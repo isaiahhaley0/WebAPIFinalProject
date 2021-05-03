@@ -98,7 +98,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Order({match}) {
   const classes = useStyles()
-  const [order, setOrder] = useState({products:[], delivery_address:{}})
+  const [order, setOrder] = useState({products:[], delivery_address:{},roundup:0})
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -118,10 +118,10 @@ export default function Order({match}) {
   }, [])
 
   const getTotal = () => {
-    return order.products.reduce((a, b) => {
+    return (order.products.reduce((a, b) => {
        const quantity = b.status == "Cancelled" ? 0 : b.quantity
         return a + (quantity*b.product.price)
-    }, 0)
+    }, 0)+order.roundup)
   }
 
     return (

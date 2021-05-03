@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 const CartItemSchema = new mongoose.Schema({
   product: {type: mongoose.Schema.ObjectId, ref: 'Product'},
+
   quantity: Number,
   shop: {type: mongoose.Schema.ObjectId, ref: 'Shop'},
   status: {type: String,
@@ -10,6 +11,8 @@ const CartItemSchema = new mongoose.Schema({
 const CartItem = mongoose.model('CartItem', CartItemSchema)
 const OrderSchema = new mongoose.Schema({
   products: [CartItemSchema],
+  roundup: Number,
+  charname: String,
   customer_name: {
     type: String,
     trim: true,

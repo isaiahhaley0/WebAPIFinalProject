@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import {makeStyles} from '@material-ui/core/styles'
 import cart from './cart-helper.js'
 import {Link} from 'react-router-dom'
+import {CheckBox} from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -102,8 +103,9 @@ const useStyles = makeStyles(theme => ({
 export default function CartItems (props) {
   const classes = useStyles()
   const [cartItems, setCartItems] = useState(cart.getCart())
-  let roundupCheck = false;
 
+  let roundupCheck = false;
+  let rd = 2;
   const handleChange = index => event => {
     let updatedCartItems = cartItems
     if(event.target.value === 0){
@@ -123,9 +125,10 @@ export default function CartItems (props) {
 
   const getRoundup = () => {
     //if the global is true, run the roundup formula and it will add to the total at the bottom of this file
-    if(roundupCheck === true) {
+    if(props.donationCheck === true) {
       //roundup formula goes here
-      return 2
+      cart.setRoundUp(1-(getTotal()-Math.floor(getTotal())))
+      return (1-(getTotal()-Math.floor(getTotal())))
     }
     else return 0
   }
@@ -141,13 +144,11 @@ export default function CartItems (props) {
   const openCheckout = () => {
     props.setCheckout(true)
   }
+  const onCheck = ()=> {
+    props.setDCheck(true)
+  }
 
   function CharityDropDown() {
-    const handleSelect=(e)=>{
-      //working on trying to set the global to true.
-      if(e !== "Title")
-        roundupCheck = true;
-    }
     const [items] = React.useState([
       {
         charity: "Roundup change to a charity?",
@@ -159,15 +160,39 @@ export default function CartItems (props) {
       { charity: "American Civil Liberties Union", name: "American Civil Liberties Union" },
       { charity: "Free Software Foundation", name: "Free Software Foundation" }
     ]);
+    const handleSelect=(name)=>{
+      //working on trying to set the global to true.
+      console.log(name.toString())
+
+      cart.setCharity(name.toString())
+
+    }
+
     return (
         <div>
-          <select className={classes.select}>
-            {items.map(({ charity, name }) => (
-                <option key={name} name={name} onSelect={handleSelect(name)}>
-                  {charity}
+          {props.donationCheck === false && <select className={classes.select} onChange={ e=> cart.setCharity(e.target.value)}>
+            {items.map(({charity, name}) => (
+                <option key={charity} name={name} value={name}  >
+                  {name}
                 </option>
-            ))}
+            ))
+
+            }
+
           </select>
+          }
+          {props.donationCheck === false &&
+          <label>
+            <input
+                type="radio"
+                name="react-tips"
+                value="option2"
+                className="form-check-input"
+                onChange={onCheck}
+            />
+            Donate?
+          </label>
+          }
         </div>
     );
   }
@@ -218,7 +243,7 @@ export default function CartItems (props) {
 
       </divider>
           <div className={classes.checkout}>
-            <span className={classes.total}>Total: ${getTotal() + getRoundup()}</span>
+            <span className={classes.total}>Total: ${getTotal() +   getRoundup()}</span>
             {!props.checkout && (auth.isAuthenticated()?
                 <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
                 :
@@ -237,5 +262,7 @@ export default function CartItems (props) {
 
 CartItems.propTypes = {
   checkout: PropTypes.bool.isRequired,
-  setCheckout: PropTypes.func.isRequired
+  setCheckout: PropTypes.func.isRequired,
+  donationCheck: PropTypes.bool.isRequired,
+  setDCheck: PropTypes.func.isRequired
 }

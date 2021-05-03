@@ -176,6 +176,7 @@ const decreaseQuantity = async (req, res, next) => {
      await Product.bulkWrite(bulkOps, {})
      next()
    } catch (err){
+      console.log(err.message)
       return res.status(400).json({
         error: "Could not update product"
       })

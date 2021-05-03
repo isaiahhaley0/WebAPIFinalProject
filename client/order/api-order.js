@@ -1,5 +1,27 @@
+
 const create = async (params, credentials, order, token) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "name": localStorage.getItem("charname"),
+    "donation": parseFloat(localStorage.getItem("roundup"))
+  });
+
+  var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("/api/roundup", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
   try {
+
     let response = await fetch('/api/orders/'+params.userId, {
         method: 'POST',
         headers: {
@@ -9,6 +31,7 @@ const create = async (params, credentials, order, token) => {
         },
         body: JSON.stringify({order: order, token:token})
       })
+
       return response.json()
     }catch(err) {
       console.log(err)

@@ -16,16 +16,20 @@ const useStyles = makeStyles(theme => ({
 export default function Cart () {
   const classes = useStyles()
   const [checkout, setCheckout] = useState(false)
-
+  const [donationCheck, setDCheck] = useState(false)
   const showCheckout = val => {
     setCheckout(val)
   }
-
+  const showDonation = val =>{
+    setDCheck(val)
+  }
     return (<div className={classes.root}>
       <Grid container spacing={8}>
         <Grid item xs={6} sm={6}>
           <CartItems checkout={checkout}
-                     setCheckout={showCheckout}/>
+                     setCheckout={showCheckout}
+                     donationCheck={donationCheck}
+                     setDCheck={showDonation}/>
         </Grid>
         {checkout &&
           <Grid item xs={6} sm={6}>

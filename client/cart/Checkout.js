@@ -48,7 +48,9 @@ export default function Checkout (){
   const [values, setValues] = useState({
     checkoutDetails: {
       products: cart.getCart(),
-      customer_name: user.name,
+        roundup: cart.getRoundUp(),
+        charname: cart.getCharity(),
+        customer_name: user.name,
       customer_email:user.email,
       delivery_address: { street: '', city: '', state: '', zipcode: '', country:''}
     },
@@ -89,6 +91,7 @@ export default function Checkout (){
           }
         <div>
           <Elements>
+
             <PlaceOrder checkoutDetails={values.checkoutDetails} />
           </Elements>
         </div>

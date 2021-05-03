@@ -22,6 +22,18 @@ const cart = {
       cb()
     }
   },
+  setCharity(value){
+    localStorage.setItem("charname",value)
+  },
+  getCharity(){
+    return localStorage.getItem("charname")
+  },
+  setRoundUp(value){
+    localStorage.setItem("roundup",value)
+  },
+  getRoundUp(){
+    return parseFloat(localStorage.getItem("roundup"))
+  },
   updateCart(itemIndex, quantity) {
     let cart = []
     if (typeof window !== "undefined") {

@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="344a1ab5-766a-42dd-ac10-96970cd2233e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/client/cart/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/cart/Cart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/cart/CartItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/cart/CartItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/cart/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/cart/Checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/cart/cart-helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/cart/cart-helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/order/Order.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/order/Order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/order/api-order.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/order/api-order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/server.generated.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/server.generated.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/charities.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/charities.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/order.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/order.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/product.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/product.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/charities.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/charities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/order.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/order.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/product/Suggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/product/Suggestions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +74,7 @@
       <workItem from="1619550785977" duration="45000" />
       <workItem from="1619697168164" duration="844000" />
       <workItem from="1619903364245" duration="18249000" />
-      <workItem from="1620046278765" duration="25166000" />
+      <workItem from="1620046278765" duration="27082000" />
     </task>
     <servers />
   </component>

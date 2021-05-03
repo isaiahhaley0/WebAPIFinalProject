@@ -164,6 +164,12 @@ export default function Order({match}) {
             <Grid item xs={5} sm={5}>
               <Card className={classes.innerCard}>
                 <Typography type="subheading" component="h2" className={classes.productTitle} color="primary">
+                  Donation Information
+                </Typography>
+                <Typography type="subheading" component="h3" className={classes.info} color="primary"><strong>Donation Recipient: {order.charname}</strong></Typography><br/>
+                <Typography type="subheading" component="h3" className={classes.info} color="primary">Donation Amount: ${order.roundup}</Typography><br/>
+                <br/>
+                <Typography type="subheading" component="h2" className={classes.productTitle} color="primary">
                  Deliver to:
                 </Typography>
                 <Typography type="subheading" component="h3" className={classes.info} color="primary"><strong>{order.customer_name}</strong></Typography><br/>

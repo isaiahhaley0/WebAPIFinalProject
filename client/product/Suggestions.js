@@ -78,23 +78,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function Suggestions (props) {
   const classes = useStyles()
-    return (<div>
-      <Paper className={classes.root} elevation={4}>
-        <Typography type="title" className={classes.title}>
-          {props.title}
-        </Typography>
-        {props.products.map((item, i) => {
-            return <span key={i}>
+  return (<div>
+    <Paper className={classes.root} elevation={4}>
+      <Typography type="title" className={classes.title}>
+        {props.title}
+      </Typography>
+      {props.products.map((item, i) => {
+        return <span key={i}>
               <Card className={classes.card}>
                 <CardMedia
-                  className={classes.cover}
-                  image={'/api/product/image/'+item._id}
-                  title={item.name}
+                    className={classes.cover}
+                    image={'/api/product/image/' + item._id}
+                    title={item.name}
                 />
                 <div className={classes.details}>
                   <CardContent className={classes.content}>
-                    <Link to={'/product/'+item._id}><Typography variant="h3" component="h3" className={classes.productTitle} color="primary">{item.name}</Typography></Link>
-                    <Link to={'/shops/'+item.shop._id}>
+                    <Link to={'/product/' + item._id}><Typography variant="h3" component="h3"
+                                                                  className={classes.productTitle}
+                                                                  color="primary">{item.name}</Typography></Link>
+                    <Link to={'/shops/' + item.shop._id}>
                       <Typography type="subheading" className={classes.subheading}>
                         <Icon className={classes.icon}>shopping_basket</Icon> {item.shop.name}
                       </Typography>
@@ -104,9 +106,10 @@ export default function Suggestions (props) {
                     </Typography>
                   </CardContent>
                   <div className={classes.controls}>
-                    <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.price}</Typography>
+                    <Typography type="subheading" component="h3" className={classes.price}
+                                color="primary">$ {item.price}</Typography>
                       <span className={classes.actions}>
-                        <Link to={'/product/'+item._id}>
+                        <Link to={'/product/' + item._id}>
                           <IconButton color="secondary" dense="dense">
                             <ViewIcon className={classes.iconButton}/>
                           </IconButton>
@@ -118,13 +121,14 @@ export default function Suggestions (props) {
                 </Card>
                 <Divider/>
               </span>
-            })
-          }
-      </Paper>
-    </div>)
-}
+      })
+      }
+    </Paper>
+  </div>)
 
-Suggestions.propTypes = {
-  products: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired
+
+  Suggestions.propTypes = {
+    products: PropTypes.array.isRequired,
+    title: PropTypes.string.isRequired
+  }
 }

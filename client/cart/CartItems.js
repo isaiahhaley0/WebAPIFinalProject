@@ -181,6 +181,18 @@ export default function CartItems (props) {
 
           </select>
           }
+          {props.donationCheck === true && <div>
+            Donating to: {localStorage.getItem("charname")}
+
+          </div>
+
+          }
+          {props.donationCheck === true && <div>
+            Donation Amount: {localStorage.getItem("roundup")}
+
+          </div>
+
+          }
           {props.donationCheck === false &&
           <label>
             <input
@@ -195,7 +207,7 @@ export default function CartItems (props) {
           }
         </div>
     );
-  }
+  };
 
   return (<Card className={classes.card}>
     <Typography type="title" className={classes.title}>
